@@ -1,0 +1,5 @@
+﻿hostname,description,version,current_datetime
+leaf1,SRLinux-v21.6.3-398-gd37728238a 7220 IXR-D2 Copyright (c) 2000-2020 Nokia. Kernel 5.4.0-52-generic #57~18.04.1-Ubuntu SMP Thu Oct 15 14:04:49 UTC 2020,v21.6.3-398-gd37728238a,2024-12-11T16:55:48.217Z
+leaf2,SRLinux-v21.6.3-398-gd37728238a 7220 IXR-D2 Copyright (c) 2000-2020 Nokia. Kernel 5.4.0-52-generic #57~18.04.1-Ubuntu SMP Thu Oct 15 14:04:49 UTC 2020,v21.6.3-398-gd37728238a,2024-12-11T16:55:49.386Z
+spine1,SRLinux-v21.6.3-398-gd37728238a 7250 IXR-6 Copyright (c) 2000-2020 Nokia. Kernel 5.4.0-52-generic #57~18.04.1-Ubuntu SMP Thu Oct 15 14:04:49 UTC 2020,v21.6.3-398-gd37728238a,2024-12-11T16:55:49.385Z
+spine2,SRLinux-v21.6.3-398-gd37728238a 7250 IXR-6 Copyright (c) 2000-2020 Nokia. Kernel 5.4.0-52-generic #57~18.04.1-Ubuntu SMP Thu Oct 15 14:04:49 UTC 2020,v21.6.3-398-gd37728238a,2024-12-11T16:55:50.228Z
