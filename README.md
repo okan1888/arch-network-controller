@@ -1,2 +1,2 @@
 # arch-network-controller
- IP Network Controller
+ IP Network Controller using gNMI protocol
