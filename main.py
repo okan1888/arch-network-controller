@@ -8,10 +8,12 @@ import sys
 import pandas as pd
 from pygnmi.client import gNMIclient
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 print("<<<<<<<<<< ARCH NETWORK CONTROLLER >>>>>>>>")
 print("<<<<<<<<<< OKAN KARADAG, 2024  >>>>>>>>")
 # Variables
+# routers should be available,here containerlab is used
 HOSTS = [
         ('leaf1', '57400'),
         ('leaf2', '57400'),
@@ -19,6 +21,7 @@ HOSTS = [
         ('spine2', '57400')
         ]
 
+node_cert =  "./cert/leaf1.pem"
 interface_dict = {}
 sys_info_dict = {}
 host_info_dict = {}
@@ -31,8 +34,10 @@ config_dict = [
             "current_datetime": ""
             } 
             ]
-
+#configuration database
 CONFIG_DB="configDB.csv"
+
+#telemetry database
 MONITOR_DB="monitorDB.csv"
 
 
@@ -59,14 +64,52 @@ def get_interfaces(host):
         result = gc.get(path=["/interface[name=ethernet-1/1]"])
         return result
 
+
+def set_host_name(host: str,name: str):
+    
+    u = [
+    (
+        "openconfig:/system/name/host-name",
+        {"config": {"name": name}},
+    )
+   ] 
+   # path_cert = node_cert if tls is used 
+   # skip_verify = True for bypassing tls 
+    with gNMIclient(target=host,username='admin',password='admin',path_cert = node_cert) as gc:
+        result = gc.set(update=u)
+        print(result)
+
+
 # API definitions
 
 app = FastAPI()
+# api input model definition alinged with pydantic
+class Config(BaseModel):
+    node: str
+    param: str 
+    value: str
+
+
 @app.get("/get-config")
-async def read_root():
-    
+async def get_config():
     data = pd.read_csv(CONFIG_DB)
     return data
+
+
+@app.post("/set-config/")
+async def set_config(cfg: Config):
+    return cfg
+
+
+@app.put("/update-config/")
+async def update_config(cfg: Config):
+    data = pd.read_csv(CONFIG_DB)
+    for (index,row) in data.iterrows():
+        if row.hostname == cfg.node:
+            data.at[index,cfg.param] = cfg.value 
+    data.to_csv(CONFIG_DB, index=False)
+    if cfg.param == "hostname":
+       set_host_name(cfg.node,cfg.value)
 
 
 if __name__ == '__main__':
