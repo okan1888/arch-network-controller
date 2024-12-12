@@ -69,8 +69,8 @@ def set_host_name(host: str,name: str):
     
     u = [
     (
-        "openconfig:/system/name/host-name",
-        {"config": {"name": name}},
+        "openconfig:/system/name",
+        {"host-name":  name},
     )
    ] 
    # path_cert = node_cert if tls is used 
@@ -109,7 +109,8 @@ async def update_config(cfg: Config):
             data.at[index,cfg.param] = cfg.value 
     data.to_csv(CONFIG_DB, index=False)
     if cfg.param == "hostname":
-       set_host_name(cfg.node,cfg.value)
+        host=(cfg.node,"57400") 
+        set_host_name(host,cfg.value)
 
 
 if __name__ == '__main__':
@@ -126,13 +127,10 @@ if __name__ == '__main__':
             for host in HOSTS:
                 sys_info_dict = get_sys_info(host)
                 host_info_dict = get_host_info(host) 
-                #print(sys_info_dict)
-               # print(host_info_dict) 
                 config_dict[0]["hostname"] = host_info_dict['notification'][0]['update'][0]['val'] 
                 config_dict[0]['description'] = sys_info_dict['notification'][0]['update'][0]['val']['description']
                 config_dict[0]['version'] = sys_info_dict['notification'][0]['update'][0]['val']['version']
                 config_dict[0]['current_datetime'] = sys_info_dict['notification'][0]['update'][0]['val']['current-datetime']
-                #print(config_dict) 
                 df = pd.DataFrame(config_dict) 
                 df.to_csv(CONFIG_DB, mode='a', index=False, header=False)  
            
