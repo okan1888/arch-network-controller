@@ -10,6 +10,8 @@ jobs:
     runs-on: self-hosted  # This uses a GitHub-hosted runner
 
     steps:
+      - name: checkout repo to self-hosted runner
+        uses: actions/checkout@v3
       - name: backup main code
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
