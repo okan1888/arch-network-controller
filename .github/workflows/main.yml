@@ -15,4 +15,4 @@ jobs:
 
       - name: Execute Script on VM
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
