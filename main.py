@@ -115,9 +115,9 @@ async def update_config(cfg: Config):
 
 if __name__ == '__main__':
     isQuit = False 
+    selection = input("please give your selection: collect hosts(host) or collect  interface(int)s\n") 
+    print("######  NW CONTROLLER INITIALIZED #######\n") 
     while not isQuit: 
-        print("######  NW CONTROLLER INITIALIZED #######\n")
-        selection = input("please give your selection: collect hosts(host) or collect  interface(int)s\n")
         if selection == "int":
            # interface_dict = get_interfaces()
             print(interface_dict['notification'][0]['update'][0]['val']['admin-state'])  
@@ -136,4 +136,4 @@ if __name__ == '__main__':
            
             print("Config DB is populated !!! \n") 
             print("####### API Server is ready ##########'\n")
-            isQuit = False
+            isQuit = True
