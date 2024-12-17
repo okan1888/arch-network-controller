@@ -10,10 +10,8 @@ jobs:
     runs-on: self-hosted  # This uses a GitHub-hosted runner
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
-          fetch-depth: 0
+      - name: checkout code 
+        uses: actions/checkout@v3
       - name: backup main code
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
