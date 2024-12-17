@@ -24,6 +24,9 @@ jobs:
       - name: destroy CLAB
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/destroy_clab.sh"
+       name: stop WebService
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/stop_webservice.sh"
       - name: sleep 1 minute
         run: sleep 60s
         shell: bash
