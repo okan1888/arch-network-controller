@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 print("<<<<<<<<<< ARCH NETWORK CONTROLLER >>>>>>>>")
-print("<<<<<<<<<< OKAN KARADAG/DEC/2024  >>>>>>>>")
+print("<<<<<<<<<< OKAN KARADAG,DEC/2024  >>>>>>>>")
 # Variables
 # routers should be available,here containerlab is used
 HOSTS = [
@@ -35,10 +35,10 @@ config_dict = [
             } 
             ]
 #configuration database
-CONFIG_DB="configDB.csv"
+CONFIG_DB="/SRL-DEV-LAB/ARCH_NW_CONTROLLER/configDB.csv"
 
 #telemetry database
-MONITOR_DB="monitorDB.csv"
+MONITOR_DB="/SRL-DEV-LAB/ARCH_NW_CONTROLLER/monitorDB.csv"
 
 
 
