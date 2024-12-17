@@ -1,0 +1,18 @@
+name: ARCH-NW-CICD
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to the 'main' branch
+
+jobs:
+  run-scripts-on-vm:
+    runs-on: ubuntu-latest  # This uses a GitHub-hosted runner
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Execute Script on VM
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
