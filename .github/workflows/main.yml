@@ -15,4 +15,4 @@ jobs:
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
       - name: upload main code
         run: |
-          sshpass -p "${{ secrets.SSH_PASS }}" scp -o StrictHostKeyChecking=no /Users/karadag/Documents/0-NOKIA/NCL4-Training/9ExternalTrainings/PYTHON/prod/arch-nw-controller/arch-network-controller/main.py  ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/git
+          sshpass -p "${{ secrets.SSH_PASS }}" scp -o StrictHostKeyChecking=no main.py  ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/git
