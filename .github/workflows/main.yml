@@ -27,14 +27,14 @@ jobs:
       - name: stop WebService
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/stop_webservice.sh"
-      - name: sleep 1 minute
-        run: sleep 60s
+      - name: sleep 30seconds
+        run: sleep 30s
         shell: bash
       - name: deploy CLAB
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/deploy_clab.sh"
-      - name: sleep 1 minute
-        run: sleep 60s
+      - name: sleep 30sec
+        run: sleep 30s
         shell: bash
       - name: get certs from routers
         run: |
