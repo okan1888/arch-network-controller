@@ -18,11 +18,20 @@ jobs:
       - name: clear DB
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/clear_db.sh"
+      - name: clear ENV
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/clear_environment.sh"
+      - name: destroy CLAB
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/destroy_clab.sh"
+      - name: sleep 1 minute
+        run: sleep 60s
+        shell: bash
       - name: deploy CLAB
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/deploy_clab.sh"
-      - name: sleep 3 minutes
-        run: sleep 100s
+      - name: sleep 1 minute
+        run: sleep 60s
         shell: bash
       - name: get certs from routers
         run: |
@@ -33,7 +42,7 @@ jobs:
       - name: deploy web service
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/run_webservice.sh"
-      - name: deploy web service
+      - name: test the arch api
         run: |
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/test_api.sh"
         
