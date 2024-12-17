@@ -17,4 +17,16 @@ jobs:
           sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/create_backup.sh"
       - name: clear DB
         run: |
-          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/clear_db.sh configDB.csv" 
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/clear_db.sh"
+      - name: deploy CLAB
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/deploy_clab.sh"
+      - name: sleep 3 minutes
+        run: sleep 180s
+        shell: bash
+      - name: prepare leaf cert
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/prepare_cert.sh"
+      - name: deploy arch nw controller
+        run: |
+          sshpass -p '${{ secrets.SSH_PASS }}' ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo bash /SRL-DEV-LAB/ARCH_NW_CONTROLLER/deploy_arch.sh"
