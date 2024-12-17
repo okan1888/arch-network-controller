@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-scripts-on-vm:
-    runs-on: ubuntu-latest  # This uses a GitHub-hosted runner
+    runs-on: self-hosted  # This uses a GitHub-hosted runner
 
     steps:
       - name: Checkout Repository
